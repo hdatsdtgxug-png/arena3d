@@ -16,7 +16,7 @@ jobs:
         run: choco install mingw -y --version=12.2.0
 
       - name: CMake yapilandir
-        run: cmake -B build -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release
+        run: cmake -B build -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_POLICY_VERSION_MINIMUM=3.5
 
       - name: Derle (Release)
         run: cmake --build build --config Release

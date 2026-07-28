@@ -1,0 +1,28 @@
+name: Windows EXE Derle
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Kodu al
+        uses: actions/checkout@v4
+
+      - name: MinGW kur (Windows 7 uyumlu derleyici)
+        run: choco install mingw -y --version=12.2.0
+
+      - name: CMake yapilandir
+        run: cmake -B build -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release
+
+      - name: Derle (Release)
+        run: cmake --build build --config Release
+
+      - name: EXE dosyasini yukle
+        uses: actions/upload-artifact@v4
+        with:
+          name: Arena3D-Windows7
+          path: build/Arena3D.exe
